@@ -7,6 +7,7 @@ RUN apk --no-cache add \
   coreutils \
   gcc \
   gcovr \
+  gdb \
   valgrind \
   libc-dev
 

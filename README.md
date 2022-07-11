@@ -12,13 +12,23 @@ image is to create an easy-to-install portable system for running unit tests wit
   * [libc-dev 0.7.2](https://pkgs.alpinelinux.org/package/v3.11/main/x86/libc-dev)
 * Environment
   * [coreutils 8.31](https://pkgs.alpinelinux.org/package/v3.11/main/x86/coreutils)
-  * gcc 9.2.0
-  * gcov 9.2.0
+  * gcc 9.3.0
+  * gcov 9.3.0
+  * gdb 8.3.1
   * valgrind 3.15.0
   * Ruby 2.7.1
 
 ## Usage
-`docker run -it --rm -v <local project path>:/project throwtheswitch/madsciencelab[:tag]`
+
+```bash
+docker run -it --rm -v <local project path>:/project throwtheswitch/madsciencelab[:tag]
+```
+But a better solution is a .bashrc function that automatically maps your pwd to project and sets the user and group to the current user.
+This avoids file creation as root when doing a ceedling:create .
+
+```bash
+ceed_here() { docker run --user $(id -u):$(id -g) -it --rm -v $(pwd):/project bd2357/ceedling_withgdb; }
+```
 
 ## Basic Articles Discussing Unit Testing
   * This docker image uses Ceedling to build "native" code as described [here](http://www.throwtheswitch.org/build/which)
